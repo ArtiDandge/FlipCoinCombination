@@ -69,7 +69,7 @@ do
 		3)((TH++))
 		DoubletDictionary["key$i"]=`echo "TH"`;;
 		
-		4)((TT))
+		4)((TT++))
 		DoubletDictionary["key$i"]=`echo "TT"`;;
 		
 		*)DoubletDictionary["key$i"]=`echo "NA"`;;
