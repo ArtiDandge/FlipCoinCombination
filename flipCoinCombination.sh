@@ -29,8 +29,6 @@ TTH=0
 THT=0
 HTH=0
 
-#FLIP variable store 0 and 1  value to show heads or tails
-FLIP=$(($((RANDOM%10))%2))
 
 #loop for singlet combination of coins
 for i in `seq $flips_for_singlet`
