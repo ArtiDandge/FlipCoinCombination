@@ -49,6 +49,7 @@ do
 	esac
 done
 
+#loop for triplet combination of coins
 for i in `seq $flips_for_triplet`
 do
         tripletFlip=$(($((RANDOM%8))+1))
