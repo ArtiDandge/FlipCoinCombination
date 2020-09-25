@@ -15,12 +15,12 @@ declare -A TripletDictionary
 #Variables for singlet combination
 heads=0
 tails=0
-#Variables for doublet combination
+#Variables for doublet combination H for heads and T for Tails
 HH=0
 TH=0
 HT=0
 TT=0
-#Variables for triplet combination
+#Variables for triplet combination H for heads and T for Tails
 HHH=0
 HHT=0
 HTT=0
