@@ -12,9 +12,22 @@ declare -A SingletDictionary
 declare -A DoubletDictionary
 declare -A TripletDictionary
 
-#Variables
+#Variables for singlet combination
 heads=0
 tails=0
+#Variables for doublet combination
+HH=0
+TH=0
+HT=0
+TT=0
+#Variables for triplet combination
+HHH=0
+HHT=0
+HTT=0
+THH=0
+TTH=0
+THT=0
+HTH=0
 
 #FLIP variable store 0 and 1  value to show heads or tails
 FLIP=$(($((RANDOM%10))%2))
@@ -36,35 +49,102 @@ do
 	fi
 done
 
+#sort and check winner in singlet combination
+if [[ $heads -gt $tails ]]
+then
+	echo "Winner in singlet combination : Heads"
+else
+        echo "Winner in singlet combination : Tails"
+fi
+
 #loop for doublet combination of coins
 for i in `seq $flips_for_doublet`
 do
 	doubletFlip=$(($((RANDOM%4))+1))
 	case $doubletFlip in 
-		1)DoubletDictionary["key$i"]=`echo "HH"`;;
-		2)DoubletDictionary["key$i"]=`echo "HT"`;;
-		3)DoubletDictionary["key$i"]=`echo "TH"`;;
-		4)DoubletDictionary["key$i"]=`echo "TT"`;;
+		1)((HH++))
+		DoubletDictionary["key$i"]=`echo "HH"`;;
+		
+		2)((HT++))
+		DoubletDictionary["key$i"]=`echo "HT"`;;
+		
+		3)((TH++))
+		DoubletDictionary["key$i"]=`echo "TH"`;;
+		
+		4)((TT))
+		DoubletDictionary["key$i"]=`echo "TT"`;;
+		
 		*)DoubletDictionary["key$i"]=`echo "NA"`;;
 	esac
 done
+
+#check winner in doublet combination by sorting
+if [[ $HH -gt $HT ]] &&  [[ $HH -gt $TH ]] && [[ $HH -gt $TT ]]
+then
+	echo "Winning in doublet combination is  : HH"
+elif [[ $HT -gt $HH ]] &&  [[ $HT -gt $TH ]] && [[ $HT -gt $TT ]]
+then
+        echo "Winning in doublet combination is  : HT"
+elif [[ $TH -gt $HH ]] &&  [[ $TH -gt $HT ]] && [[ $TH -gt $TT ]]
+then
+        echo "Winning in doublet combination is : TH"
+else
+        echo "Winning in doublet combination is : TT"
+fi
+
 
 #loop for triplet combination of coins
 for i in `seq $flips_for_triplet`
 do
         tripletFlip=$(($((RANDOM%8))+1))
         case $tripletFlip in
-                1)TripletDictionary["key$i"]=`echo "HHH"`;;
-                2)TripletDictionary["key$i"]=`echo "HHT"`;;
-                3)TripletDictionary["key$i"]=`echo "HTH"`;;
-                4)TripletDictionary["key$i"]=`echo "THH"`;;
-		5)TripletDictionary["key$i"]=`echo "TTH"`;;
-                6)TripletDictionary["key$i"]=`echo "THT"`;; 
-		7)TripletDictionary["key$i"]=`echo "HTT"`;;
-		8)TripletDictionary["key$i"]=`echo "TTT"`;;
+                1)((HHH++))
+		TripletDictionary["key$i"]=`echo "HHH"`;;
+                
+		2)((HHT++))
+		TripletDictionary["key$i"]=`echo "HHT"`;;
+                
+		3)((HTH++))
+		TripletDictionary["key$i"]=`echo "HTH"`;;
+                
+		4)((THH++))
+		TripletDictionary["key$i"]=`echo "THH"`;;
+		
+		5)((TTH++))
+		TripletDictionary["key$i"]=`echo "TTH"`;;
+                
+		6)((THT++))
+		TripletDictionary["key$i"]=`echo "THT"`;; 
+		
+		7)((HTT++))
+		TripletDictionary["key$i"]=`echo "HTT"`;;
+		
+		8)((TTT++))
+		TripletDictionary["key$i"]=`echo "TTT"`;;
+		
 		*)TripletDictionary["key$i"]=`echo "NA"`;;
         esac
 done
+
+#display winner combination from triplet by sorting
+if [[ $HHH -gt $HHT ]] && [[ $HHH -gt $HTH ]] && [[ $HHH -gt $THH ]]&& [[ $HHH -gt $THT ]]&& [[ $HHH -gt $HTT ]] && [[ $HHH -gt $TTT ]]
+then
+	echo "Winner in triplet combination is : HHH"
+elif [[ $HHT -gt $HHH ]] && [[ $HHT -gt $HTH ]] && [[ $HHT -gt $THH ]]&& [[ $HHT -gt $THT ]]&& [[ $HHT -gt $HTT ]] && [[ $HHT -gt $TTT ]]
+then
+	echo "Winner in triplet combination is : HHT"
+elif [[ $THH -gt $HHT ]] && [[ $THH -gt $HTH ]] && [[ $THH -gt $HHH ]]&& [[ $THH -gt $THT ]]&& [[ $THH -gt $HTT ]] && [[ $THH -gt $TTT ]]
+then
+	echo "Winner in triplet combination is : THH"
+elif [[ $THT -gt $HHT ]] && [[ $THT -gt $HTH ]] && [[ $THT -gt $THH ]]&& [[ $THT -gt $HHH ]]&& [[ $THT -gt $HTT ]] && [[ $THT -gt $TTT ]]
+then
+        echo "Winner in triplet combination is : THT"
+elif [[ $HTT -gt $HHT ]] && [[ $HTT -gt $HTH ]] && [[ $HTT -gt $THH ]]&& [[ $HTT -gt $THT ]]&& [[ $HTT -gt $HHH ]] && [[ $HTT -gt $TTT ]]
+then
+        echo "Winner in triplet combination is : HTT"
+else
+	echo "Winner in triplet combination is : TTT"
+fi
 
 
 #display singlet dictionary and its percentage 
