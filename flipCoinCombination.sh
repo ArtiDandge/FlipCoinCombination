@@ -150,7 +150,7 @@ echo -e "Dictionary to show Singlet Combination : \n ${SingletDictionary[@]}"
 echo "Percentage of head win: $head_percent%";
 echo "Percentage of Tail win: $tail_percent%";
 singlet_count=${#SingletDictionary[@]}
-singlet_percentage=`echo ${#SingletDictionary[@]} | awk 'BEGIN{printf("%0.2f", '$head_percent'+'$tail_percent')}'`
+singlet_percentage=`echo ${#SingletDictionary[@]} | awk 'BEGIN{printf("%0.2f", '$head_percent' + '$tail_percent')}'`
 echo "singlet percentage : $singlet_percentage"
 
 #display doublet dictionary and its percentage 
